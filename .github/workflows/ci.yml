@@ -22,8 +22,10 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
+        # pnpm/action-setup@v4 auto-detects the version from the
+        # "packageManager" field in package.json (Corepack). Do NOT pass a
+        # conflicting version input — doing so caused "Setup pnpm" to fail
+        # on the first CI run.
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
