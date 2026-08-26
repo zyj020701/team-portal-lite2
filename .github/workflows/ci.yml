@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Cancel superseded runs on the same ref to save CI minutes.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Lint · Typecheck · Test · Build · Lighthouse
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Unit & component tests
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+        env:
+          # Lighthouse audits run against the production bundle; the
+          # WebSocket client gracefully no-ops when this is unset.
+          NEXT_PUBLIC_WS_URL: ''
+          NEXT_PUBLIC_API_URL: 'http://127.0.0.1:3210'
+
+      - name: Lighthouse CI (autorun)
+        run: pnpm lhci
+        env:
+          CI: true
+          NEXT_PUBLIC_WS_URL: ''
+          NEXT_PUBLIC_API_URL: 'http://127.0.0.1:3210'
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: .lighthouse/ci
+          retention-days: 14
+          if-no-files-found: warn

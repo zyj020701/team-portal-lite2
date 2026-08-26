@@ -1,0 +1,253 @@
+{
+  "nav": {
+    "dashboard": "대시보드",
+    "tickets": "티켓",
+    "virtualList": "가상 목록"
+  },
+  "common": {
+    "confirm": "확인",
+    "cancel": "취소",
+    "close": "닫기",
+    "save": "저장",
+    "loading": "로딩 중...",
+    "retry": "재시도",
+    "search": "검색",
+    "all": "전체",
+    "yes": "예",
+    "no": "아니오",
+    "back": "뒤로",
+    "actions": {
+      "confirm": "확인",
+      "cancel": "취소",
+      "close": "닫기",
+      "collapseSidebar": "사이드바 접기",
+      "openMenu": "메뉴 열기"
+    },
+    "fields": {
+      "status": "상태",
+      "priority": "우선순위",
+      "assignee": "담당자",
+      "createdAt": "생성일시",
+      "updatedAt": "수정일시",
+      "customer": "고객"
+    },
+    "language": {
+      "switchLanguage": "언어 전환"
+    }
+  },
+  "detail": {
+    "title": "티켓 상세",
+    "ticketId": "티켓 ID",
+    "notFound": "티켓을 불러오지 못했거나 존재하지 않습니다",
+    "loadError": "티켓 로드에 실패했습니다. 다시 시도해 주세요",
+    "backToList": "목록으로 돌아가기",
+    "basicInfo": "기본 정보",
+    "customerInfo": "고객 정보",
+    "description": "설명",
+    "internalNotes": "내부 메모",
+    "actions": "작업",
+    "timeline": {
+      "created": "생성",
+      "assigned": "할당",
+      "status_changed": "상태 변경",
+      "priority_changed": "우선순위 변경",
+      "comment": "댓글",
+      "assignedTo": "{name}에게 할당",
+      "heading": "타임라인",
+      "types": {
+        "created": "생성",
+        "assigned": "할당",
+        "status_changed": "상태 변경",
+        "priority_changed": "우선순위 변경",
+        "comment": "댓글"
+      }
+    },
+    "customerName": "고객명",
+    "contact": "연락처",
+    "company": "회사",
+    "assigned": "할당됨",
+    "unassigned": "미할당",
+    "ticketClosed": "이 티켓은 종료되었습니다. 사용 가능한 작업이 없습니다.",
+    "markAs": "{status}(으)로 표시",
+    "processing": "처리 중...",
+    "closing": "종료 중...",
+    "confirmClose": "종료 확인",
+    "confirmCloseMessage": "이 티켓을 종료하시겠습니까? 다시 열 수 없습니다.",
+    "statusUpdateFailed": "상태 업데이트에 실패했습니다. 다시 시도해 주세요",
+    "illegalTransition": "잘못된 상태 전환: {from} → {to}",
+    "addNotePlaceholder": "내부 메모 추가...",
+    "noteSubmitFailed": "메모 제출에 실패했습니다. 다시 시도해 주세요",
+    "submitting": "제출 중...",
+    "addNote": "메모 추가",
+    "noNotes": "메모가 없습니다",
+    "priorityChangeFailed": "우선순위 업데이트에 실패했습니다",
+    "assignFailed": "할당에 실패했습니다. 다시 시도하세요",
+    "updating": "업데이트 중...",
+    "status": {
+      "pending": "대기 중",
+      "in_progress": "처리 중",
+      "resolved": "해결됨",
+      "closed": "종료됨"
+    },
+    "priority": {
+      "urgent": "긴급",
+      "high": "높음",
+      "medium": "중간",
+      "low": "낮음"
+    },
+    "invalidTransition": "이 상태 전환을 실행할 수 없습니다",
+    "updateFailed": "상태 업데이트에 실패했습니다. 다시 시도하세요",
+    "noActions": "현재 상태에서 실행 가능한 작업이 없습니다",
+    "confirmCloseTitle": "티켓을 닫으시겠습니까?",
+    "confirmCloseBtn": "닫기 확인",
+    "cancel": "취소"
+  },
+  "tickets": {
+    "list": {
+      "title": "티켓 목록",
+      "loading": "티켓 목록 로딩 중...",
+      "empty": "조건에 맞는 티켓이 없습니다",
+      "ariaLabel": "티켓 목록",
+      "selectTicket": "티켓 {id} 선택",
+      "count": "총 {count}건의 티켓",
+      "selectAll": "모두 선택"
+    },
+    "columns": {
+      "id": "ID",
+      "title": "제목",
+      "customer": "고객",
+      "priority": "우선순위",
+      "status": "상태",
+      "assignee": "담당자",
+      "createdAt": "생성일시"
+    },
+    "batch": {
+      "selectedCount": "{count}건 선택됨",
+      "deselectAll": "선택 해제",
+      "assign": "일괄 할당",
+      "close": "일괄 종료",
+      "confirmClose": "선택한 티켓을 종료하시겠습니까?",
+      "confirmCloseTitle": "티켓 종료 확인",
+      "assignTo": "담당자 선택...",
+      "assigning": "할당 중...",
+      "closing": "종료 중...",
+      "failed": "작업에 실패했습니다. 다시 시도해 주세요"
+    },
+    "filter": {
+      "allStatuses": "모든 상태",
+      "allPriorities": "모든 우선순위",
+      "allAssignees": "모든 담당자",
+      "searchPlaceholder": "티켓 제목 또는 고객명 검색...",
+      "searchAriaLabel": "티켓 검색",
+      "placeholderStatus": "상태 필터",
+      "placeholderPriority": "우선순위 필터",
+      "placeholderAssignee": "담당자 필터",
+      "advanced": "고급 필터",
+      "ariaLabel": "티켓 필터"
+    },
+    "overview": {
+      "title": "티켓 개요",
+      "viewDetails": "세부 정보 보기",
+      "ticketDetail": "티켓 {id}",
+      "detailTitle": "티켓 세부 정보",
+      "clickToView": "세부 정보를 보려면 표에서 티켓 행을 클릭하세요."
+    }
+  },
+  "tenant": {
+    "switchTenant": "테넌트 전환",
+    "selectTenant": "테넌트 선택"
+  },
+  "notifications": {
+    "title": "알림",
+    "markAllRead": "모두 읽음",
+    "empty": "알림이 없습니다",
+    "justNow": "방금",
+    "minutesAgo": "{count}분 전",
+    "hoursAgo": "{count}시간 전",
+    "read": "읽음",
+    "markAsRead": "알림 {id}을(를) 읽음으로 표시",
+    "ariaLabel": "읽지 않은 알림 {count}건",
+    "types": {
+      "ticketAssigned": "새 티켓 할당",
+      "ticketUpdated": "티켓 업데이트",
+      "mention": "멘션되었습니다"
+    }
+  },
+  "dashboard": {
+    "title": "데이터 개요",
+    "stats": {
+      "newToday": "오늘 신규 티켓",
+      "pending": "대기 중 티켓",
+      "resolved": "해결된 티켓",
+      "avgResponse": "평균 응답 시간"
+    },
+    "trend": "최근 7일 티켓 추이",
+    "distribution": "티켓 상태 분포",
+    "barRank": "담당자별 티켓 수 순위",
+    "ariaLabelTrend": "최근 7일간 신규 및 해결 티켓을 보여주는 라인 차트",
+    "ariaLabelPie": "티켓 상태 분포를 보여주는 파이 차트",
+    "ariaLabelBar": "담당자별 티켓 수 상위 5명을 보여주는 바 차트",
+    "loading": "데이터 로딩 중...",
+    "error": "데이터 로드에 실패했습니다",
+    "retry": "재시도",
+    "refresh": "새로고침",
+    "refreshing": "새로고침 중...",
+    "noData": "데이터가 없습니다",
+    "newTickets": "신규",
+    "resolvedTickets": "해결됨",
+    "assignee": "담당자",
+    "count": "티켓 수",
+    "card": {
+      "pendingAria": "대기 중 티켓: {count}건, 전년 대비 {percent}% 증가",
+      "newAria": "오늘 신규 티켓: {count}건, 전년 대비 {percent}% 감소",
+      "resolvedAria": "해결된 티켓: {count}건, 전년 대비 {percent}% 증가",
+      "avgAria": "평균 응답 시간: {value}"
+    },
+    "trendPlaceholder": "추세 차트 자리 표시자",
+    "piePlaceholder": "파이 차트 자리 표시자",
+    "vsLastPeriod": "지난 기간 대비",
+    "clickToDrillDown": "클릭하여 자세히 보기",
+    "topAssignees": "담당자",
+    "ticketCount": "티켓 수",
+    "status": {
+      "pending": "대기 중",
+      "in_progress": "진행 중",
+      "resolved": "해결됨",
+      "closed": "종료됨"
+    }
+  },
+  "virtualList": {
+    "title": "VirtualList 10만 건 성능 테스트",
+    "total": "총계: {count}건",
+    "indexPlaceholder": "인덱스",
+    "jump": "이동",
+    "measureDom": "DOM 노드 수",
+    "currentDomRows": "현재 DOM 행 수: {count}",
+    "generating": "10만 건 데이터 생성 중…",
+    "description": "가상 스크롤 목록 데모, 10만 개 데이터를 부드럽게 렌더링합니다.",
+    "placeholder": "가상 목록 컴포넌트 자리 표시자 영역"
+  },
+  "home": {
+    "tagline": "고급 상담원 데스크 — 데이터 흐름: page(RSC) → feature → ui → lib(utils)",
+    "enterTickets": "티켓 목록으로 →"
+  },
+  "feature": {
+    "overview": "티켓 개요",
+    "viewDetails": "상세 보기",
+    "ticketTitle": "티켓 {id}",
+    "titleLabel": "제목:",
+    "statusLabel": "상태:",
+    "createdAtLabel": "생성일시:",
+    "clickToView": "테이블에서 티켓 행을 클릭하여 상세를 확인하세요.",
+    "priority": {
+      "low": "낮음",
+      "medium": "중간",
+      "high": "높음",
+      "urgent": "긴급"
+    }
+  },
+  "metadata": {
+    "title": "Team Portal Lite — 고급 티켓 콘솔",
+    "description": "대기업 고객 서비스 부서를 위한 B2B SaaS 티켓 관리 시스템"
+  }
+}

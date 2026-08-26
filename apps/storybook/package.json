@@ -1,0 +1,19 @@
+{
+  "name": "@team-portal/storybook",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc --watch",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist .next"
+  },
+  "dependencies": {
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "@team-portal/ui": "workspace:*",
+    "@team-portal/icons": "workspace:*",
+    "@team-portal/design-tokens": "workspace:*"
+  }
+}

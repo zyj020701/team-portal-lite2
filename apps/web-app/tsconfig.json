@@ -1,0 +1,25 @@
+﻿{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@team-portal/ui": ["../../packages/ui/src"],
+      "@team-portal/icons": ["../../packages/icons/src"],
+      "@team-portal/hooks": ["../../packages/hooks/src"],
+      "@team-portal/utils": ["../../packages/utils/src"],
+      "@team-portal/types": ["../../packages/types/src"],
+      "@team-portal/api-client": ["../../packages/api-client/src"],
+      "@team-portal/config-store": ["../../packages/config-store/src"],
+      "@team-portal/i18n": ["../../packages/i18n/src"],
+      "@team-portal/config-tailwind": ["../../packages/config-tailwind/src"],
+      "@team-portal/ws-client": ["../../packages/ws-client/src"]
+    },
+    "jsx": "preserve",
+    "plugins": [{ "name": "next" }],
+    "allowJs": true,
+    "noEmit": true,
+    "incremental": true
+  },
+  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts"]
+}

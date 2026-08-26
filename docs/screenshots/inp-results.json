@@ -1,0 +1,26 @@
+[
+  {
+    "path": "/zh/tickets",
+    "label": "工单列表 Tickets",
+    "inpMs": 32,
+    "rating": "good"
+  },
+  {
+    "path": "/zh/dashboard",
+    "label": "Dashboard",
+    "inpMs": 32,
+    "rating": "good"
+  },
+  {
+    "path": "/zh/tickets/TK-00001",
+    "label": "工单详情 Detail",
+    "inpMs": 16,
+    "rating": "good"
+  },
+  {
+    "path": "/zh",
+    "label": "首页 Home",
+    "inpMs": 0,
+    "rating": "good"
+  }
+]

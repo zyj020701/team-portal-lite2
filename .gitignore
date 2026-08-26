@@ -1,0 +1,58 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+
+# Turborepo
+.turbo/
+
+# Testing & coverage
+coverage/
+.nyc_output/
+
+# Lighthouse CI — temporary collection directory (raw LHRs).
+# The curated upload output in .lighthouse/ci/ is retained for artifacts.
+.lighthouseci/
+
+# Raw Lighthouse run artifacts (curated reports live in docs/reports/ and docs/screenshots/)
+.lighthouse/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+playwright/.cache/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Misc scratch / verification outputs
+s*-*.txt
+s*-verify-*.txt
+dev-output.txt
+prod-out.txt
+server-output.txt
+build-output.txt
+tsc-output.txt

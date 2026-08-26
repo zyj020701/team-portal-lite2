@@ -1,0 +1,36 @@
+node_modules
+dist
+.next
+build
+coverage
+.lighthouse
+.turbo
+pnpm-lock.yaml
+*.md
+
+# Generated / machine-readable artifacts
+docs/reports/*.json
+**/*.min.js
+**/*.min.css
+
+# Lighthouse / CI artifacts
+**/.lighthouse/**
+**/lighthouse-report/**
+
+# Package manager / VCS
+.git
+.husky
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env files (no Prettier parser)
+.env
+.env.*
+

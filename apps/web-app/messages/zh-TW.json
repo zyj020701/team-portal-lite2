@@ -1,0 +1,253 @@
+{
+  "nav": {
+    "dashboard": "儀表板",
+    "tickets": "工單",
+    "virtualList": "虛擬列表"
+  },
+  "common": {
+    "confirm": "確認",
+    "cancel": "取消",
+    "close": "關閉",
+    "save": "儲存",
+    "loading": "載入中...",
+    "retry": "重試",
+    "search": "搜尋",
+    "all": "全部",
+    "yes": "是",
+    "no": "否",
+    "back": "返回",
+    "actions": {
+      "confirm": "確認",
+      "cancel": "取消",
+      "close": "關閉",
+      "collapseSidebar": "摺疊側邊欄",
+      "openMenu": "打開選單"
+    },
+    "fields": {
+      "status": "狀態",
+      "priority": "優先級",
+      "assignee": "處理人",
+      "createdAt": "建立時間",
+      "updatedAt": "更新時間",
+      "customer": "客戶"
+    },
+    "language": {
+      "switchLanguage": "切換語言"
+    }
+  },
+  "detail": {
+    "title": "工單詳情",
+    "ticketId": "工單編號",
+    "notFound": "工單載入失敗或不存在",
+    "loadError": "工單載入失敗，請重試",
+    "backToList": "返回列表",
+    "basicInfo": "基本資訊",
+    "customerInfo": "客戶資訊",
+    "description": "問題描述",
+    "internalNotes": "內部備註",
+    "actions": "操作",
+    "timeline": {
+      "created": "建立",
+      "assigned": "分配",
+      "status_changed": "狀態變更",
+      "priority_changed": "優先級變更",
+      "comment": "備註",
+      "assignedTo": "分配給 {name}",
+      "heading": "處理時間線",
+      "types": {
+        "created": "建立",
+        "assigned": "分配",
+        "status_changed": "狀態變更",
+        "priority_changed": "優先級變更",
+        "comment": "備註"
+      }
+    },
+    "customerName": "客戶名稱",
+    "contact": "聯絡方式",
+    "company": "所屬企業",
+    "assigned": "已分配",
+    "unassigned": "未分配",
+    "ticketClosed": "工單已關閉，無可用操作。",
+    "markAs": "標記為{status}",
+    "processing": "處理中...",
+    "closing": "關閉中...",
+    "confirmClose": "確認關閉",
+    "confirmCloseMessage": "確定關閉該工單嗎？關閉後不可重新開啟。",
+    "statusUpdateFailed": "狀態更新失敗，請重試",
+    "illegalTransition": "非法狀態轉換：{from} → {to}",
+    "addNotePlaceholder": "新增內部備註...",
+    "noteSubmitFailed": "備註提交失敗，請重試",
+    "submitting": "提交中...",
+    "addNote": "新增備註",
+    "noNotes": "暫無備註",
+    "priorityChangeFailed": "優先級更新失敗",
+    "assignFailed": "分配失敗，請重試",
+    "updating": "更新中...",
+    "status": {
+      "pending": "待處理",
+      "in_progress": "處理中",
+      "resolved": "已解決",
+      "closed": "已關閉"
+    },
+    "priority": {
+      "urgent": "緊急",
+      "high": "高",
+      "medium": "中",
+      "low": "低"
+    },
+    "invalidTransition": "無法執行此狀態轉換",
+    "updateFailed": "狀態更新失敗，請重試",
+    "noActions": "目前狀態無可執行操作",
+    "confirmCloseTitle": "確認關閉工單？",
+    "confirmCloseBtn": "確認關閉",
+    "cancel": "取消"
+  },
+  "tickets": {
+    "list": {
+      "title": "工單列表",
+      "loading": "載入工單列表...",
+      "empty": "暫無符合條件的工單",
+      "ariaLabel": "工單列表",
+      "selectTicket": "選擇工單 {id}",
+      "count": "共 {count} 條工單",
+      "selectAll": "全選"
+    },
+    "columns": {
+      "id": "編號",
+      "title": "工單標題",
+      "customer": "客戶",
+      "priority": "優先級",
+      "status": "狀態",
+      "assignee": "處理人",
+      "createdAt": "建立時間"
+    },
+    "batch": {
+      "selectedCount": "已選擇 {count} 項",
+      "deselectAll": "取消選擇",
+      "assign": "批次分配",
+      "close": "批次關閉",
+      "confirmClose": "確定關閉選中的工單嗎？",
+      "confirmCloseTitle": "確認關閉工單",
+      "assignTo": "選擇處理人...",
+      "assigning": "分配中...",
+      "closing": "關閉中...",
+      "failed": "操作失敗，請重試"
+    },
+    "filter": {
+      "allStatuses": "全部狀態",
+      "allPriorities": "全部優先級",
+      "allAssignees": "全部處理人",
+      "searchPlaceholder": "搜尋工單標題或客戶名稱...",
+      "searchAriaLabel": "搜尋工單",
+      "placeholderStatus": "篩選狀態",
+      "placeholderPriority": "篩選優先級",
+      "placeholderAssignee": "篩選處理人",
+      "advanced": "進階篩選",
+      "ariaLabel": "工單篩選"
+    },
+    "overview": {
+      "title": "工單概覽",
+      "viewDetails": "查看詳情",
+      "ticketDetail": "工單 {id}",
+      "detailTitle": "工單詳情",
+      "clickToView": "點擊表格中的工單行查看詳情。"
+    }
+  },
+  "tenant": {
+    "switchTenant": "切換租戶",
+    "selectTenant": "選擇租戶"
+  },
+  "notifications": {
+    "title": "通知",
+    "markAllRead": "全部已讀",
+    "empty": "暫無通知",
+    "justNow": "剛剛",
+    "minutesAgo": "{count} 分鐘前",
+    "hoursAgo": "{count} 小時前",
+    "read": "已讀",
+    "markAsRead": "標記通知 {id} 為已讀",
+    "ariaLabel": "{count} 條未讀通知",
+    "types": {
+      "ticketAssigned": "新工單分配",
+      "ticketUpdated": "工單更新",
+      "mention": "有人@你"
+    }
+  },
+  "dashboard": {
+    "title": "資料概覽",
+    "stats": {
+      "newToday": "今日新增工單",
+      "pending": "待處理工單",
+      "resolved": "已解決工單",
+      "avgResponse": "平均回應時間"
+    },
+    "trend": "近 7 天工單趨勢",
+    "distribution": "工單狀態分布",
+    "barRank": "處理人工單量排行",
+    "ariaLabelTrend": "近 7 天工單量趨勢折線圖，展示新增與已解決工單對比",
+    "ariaLabelPie": "工單狀態分布圓餅圖，展示各狀態佔比",
+    "ariaLabelBar": "處理人工單量排行條形圖，展示 Top 5 處理人",
+    "loading": "載入資料中...",
+    "error": "資料載入失敗",
+    "retry": "重試",
+    "refresh": "重新整理",
+    "refreshing": "重新整理中...",
+    "noData": "暫無資料",
+    "newTickets": "新增",
+    "resolvedTickets": "已解決",
+    "assignee": "處理人",
+    "count": "工單數",
+    "card": {
+      "pendingAria": "待處理工單：{count}，同比上升 {percent}",
+      "newAria": "今日新增工單：{count}，同比下降 {percent}",
+      "resolvedAria": "已解決工單：{count}，同比上升 {percent}",
+      "avgAria": "平均回應時間：{value}"
+    },
+    "trendPlaceholder": "趨勢圖佔位",
+    "piePlaceholder": "圓餅圖佔位",
+    "vsLastPeriod": "較上週期",
+    "clickToDrillDown": "點擊查看詳情",
+    "topAssignees": "處理人",
+    "ticketCount": "工單數",
+    "status": {
+      "pending": "待處理",
+      "in_progress": "處理中",
+      "resolved": "已解決",
+      "closed": "已關閉"
+    }
+  },
+  "virtualList": {
+    "title": "VirtualList 10萬筆資料驗證",
+    "total": "總計: {count} 筆",
+    "indexPlaceholder": "索引",
+    "jump": "跳轉",
+    "measureDom": "DOM 節點數",
+    "currentDomRows": "目前 DOM 行數: {count}",
+    "generating": "正在生成 10 萬筆資料…",
+    "description": "虛擬滾動列表示範，支援 10 萬筆資料流暢渲染。",
+    "placeholder": "虛擬列表元件佔位區域"
+  },
+  "home": {
+    "tagline": "高級接單台 — 資料鏈路：page（RSC）→ feature → ui → lib（utils）",
+    "enterTickets": "進入工單列表 →"
+  },
+  "feature": {
+    "overview": "工單概覽",
+    "viewDetails": "查看詳情",
+    "ticketTitle": "工單 {id}",
+    "titleLabel": "標題：",
+    "statusLabel": "狀態：",
+    "createdAtLabel": "建立時間：",
+    "clickToView": "點擊表格中的工單列查看詳情。",
+    "priority": {
+      "low": "低",
+      "medium": "中",
+      "high": "高",
+      "urgent": "緊急"
+    }
+  },
+  "metadata": {
+    "title": "Team Portal Lite — 高級接單台",
+    "description": "面向大型企業客服部門的 B2B SaaS 工單管理系統"
+  }
+}

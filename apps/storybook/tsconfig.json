@@ -1,0 +1,13 @@
+﻿{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@team-portal/ui": ["../../packages/ui/src"],
+      "@team-portal/icons": ["../../packages/icons/src"],
+      "@team-portal/design-tokens": ["../../packages/design-tokens/src"]
+    }
+  },
+  "include": ["src/**/*"]
+}

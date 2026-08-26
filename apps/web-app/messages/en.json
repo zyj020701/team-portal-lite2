@@ -1,0 +1,253 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "tickets": "Tickets",
+    "virtualList": "Virtual List"
+  },
+  "common": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "close": "Close",
+    "save": "Save",
+    "loading": "Loading...",
+    "retry": "Retry",
+    "search": "Search",
+    "all": "All",
+    "yes": "Yes",
+    "no": "No",
+    "back": "Back",
+    "actions": {
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "close": "Close",
+      "collapseSidebar": "Collapse sidebar",
+      "openMenu": "Open menu"
+    },
+    "fields": {
+      "status": "Status",
+      "priority": "Priority",
+      "assignee": "Assignee",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "customer": "Customer"
+    },
+    "language": {
+      "switchLanguage": "Switch language"
+    }
+  },
+  "detail": {
+    "title": "Ticket Detail",
+    "ticketId": "Ticket ID",
+    "notFound": "Ticket failed to load or does not exist",
+    "loadError": "Failed to load ticket, please try again",
+    "backToList": "Back to list",
+    "basicInfo": "Basic Information",
+    "customerInfo": "Customer Information",
+    "description": "Description",
+    "internalNotes": "Internal Notes",
+    "actions": "Actions",
+    "timeline": {
+      "created": "Created",
+      "assigned": "Assigned",
+      "status_changed": "Status Changed",
+      "priority_changed": "Priority Changed",
+      "comment": "Comment",
+      "assignedTo": "Assigned to {name}",
+      "heading": "Timeline",
+      "types": {
+        "created": "Created",
+        "assigned": "Assigned",
+        "status_changed": "Status Changed",
+        "priority_changed": "Priority Changed",
+        "comment": "Comment"
+      }
+    },
+    "customerName": "Customer Name",
+    "contact": "Contact",
+    "company": "Company",
+    "assigned": "Assigned",
+    "unassigned": "Unassigned",
+    "ticketClosed": "This ticket is closed. No actions available.",
+    "markAs": "Mark as {status}",
+    "processing": "Processing...",
+    "closing": "Closing...",
+    "confirmClose": "Confirm Close",
+    "confirmCloseMessage": "Are you sure you want to close this ticket? It cannot be reopened.",
+    "statusUpdateFailed": "Status update failed, please try again",
+    "illegalTransition": "Illegal status transition: {from} → {to}",
+    "addNotePlaceholder": "Add an internal note...",
+    "noteSubmitFailed": "Failed to submit note, please try again",
+    "submitting": "Submitting...",
+    "addNote": "Add Note",
+    "noNotes": "No notes yet",
+    "priorityChangeFailed": "Failed to update priority",
+    "assignFailed": "Failed to assign, please try again",
+    "updating": "Updating...",
+    "status": {
+      "pending": "Pending",
+      "in_progress": "In Progress",
+      "resolved": "Resolved",
+      "closed": "Closed"
+    },
+    "priority": {
+      "urgent": "Urgent",
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "invalidTransition": "This status transition is not allowed",
+    "updateFailed": "Failed to update status, please try again",
+    "noActions": "No actions available for current status",
+    "confirmCloseTitle": "Confirm close ticket?",
+    "confirmCloseBtn": "Confirm Close",
+    "cancel": "Cancel"
+  },
+  "tickets": {
+    "list": {
+      "title": "Ticket List",
+      "loading": "Loading ticket list...",
+      "empty": "No tickets match the current filters",
+      "ariaLabel": "Ticket list",
+      "selectTicket": "Select ticket {id}",
+      "count": "{count} ticket(s) total",
+      "selectAll": "Select all"
+    },
+    "columns": {
+      "id": "ID",
+      "title": "Title",
+      "customer": "Customer",
+      "priority": "Priority",
+      "status": "Status",
+      "assignee": "Assignee",
+      "createdAt": "Created At"
+    },
+    "batch": {
+      "selectedCount": "{count} item(s) selected",
+      "deselectAll": "Deselect all",
+      "assign": "Batch Assign",
+      "close": "Batch Close",
+      "confirmClose": "Are you sure you want to close the selected tickets?",
+      "confirmCloseTitle": "Confirm Close Tickets",
+      "assignTo": "Select assignee...",
+      "assigning": "Assigning...",
+      "closing": "Closing...",
+      "failed": "Operation failed, please try again"
+    },
+    "filter": {
+      "allStatuses": "All statuses",
+      "allPriorities": "All priorities",
+      "allAssignees": "All assignees",
+      "searchPlaceholder": "Search ticket title or customer name...",
+      "searchAriaLabel": "Search tickets",
+      "placeholderStatus": "Filter by status",
+      "placeholderPriority": "Filter by priority",
+      "placeholderAssignee": "Filter by assignee",
+      "advanced": "Advanced filters",
+      "ariaLabel": "Ticket filters"
+    },
+    "overview": {
+      "title": "Ticket Overview",
+      "viewDetails": "View Details",
+      "ticketDetail": "Ticket {id}",
+      "detailTitle": "Ticket Detail",
+      "clickToView": "Click a ticket row in the table to view details."
+    }
+  },
+  "tenant": {
+    "switchTenant": "Switch tenant",
+    "selectTenant": "Select tenant"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "empty": "No notifications",
+    "justNow": "just now",
+    "minutesAgo": "{count} min ago",
+    "hoursAgo": "{count} h ago",
+    "read": "Read",
+    "markAsRead": "Mark notification {id} as read",
+    "ariaLabel": "{count} unread notifications",
+    "types": {
+      "ticketAssigned": "New ticket assigned",
+      "ticketUpdated": "Ticket updated",
+      "mention": "You were mentioned"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "stats": {
+      "newToday": "New Tickets Today",
+      "pending": "Pending Tickets",
+      "resolved": "Resolved Tickets",
+      "avgResponse": "Avg Response Time"
+    },
+    "trend": "Ticket Trend (Last 7 Days)",
+    "distribution": "Ticket Status Distribution",
+    "barRank": "Top Assignees by Ticket Count",
+    "ariaLabelTrend": "Line chart showing new vs resolved tickets over the last 7 days",
+    "ariaLabelPie": "Pie chart showing the distribution of ticket statuses",
+    "ariaLabelBar": "Bar chart showing the top 5 assignees by ticket count",
+    "loading": "Loading data...",
+    "error": "Failed to load data",
+    "retry": "Retry",
+    "refresh": "Refresh",
+    "refreshing": "Refreshing...",
+    "noData": "No data available",
+    "newTickets": "New",
+    "resolvedTickets": "Resolved",
+    "assignee": "Assignee",
+    "count": "Tickets",
+    "card": {
+      "pendingAria": "Pending tickets: {count}, up {percent} year over year",
+      "newAria": "New tickets today: {count}, down {percent} year over year",
+      "resolvedAria": "Resolved tickets: {count}, up {percent} year over year",
+      "avgAria": "Average response time: {value}"
+    },
+    "trendPlaceholder": "Trend chart placeholder",
+    "piePlaceholder": "Pie chart placeholder",
+    "vsLastPeriod": "vs last period",
+    "clickToDrillDown": "Click to view details",
+    "topAssignees": "Assignee",
+    "ticketCount": "Ticket count",
+    "status": {
+      "pending": "Pending",
+      "in_progress": "In Progress",
+      "resolved": "Resolved",
+      "closed": "Closed"
+    }
+  },
+  "virtualList": {
+    "title": "VirtualList 100k Row Performance Test",
+    "total": "Total: {count} rows",
+    "indexPlaceholder": "Index",
+    "jump": "Jump",
+    "measureDom": "Measured DOM nodes",
+    "currentDomRows": "Current DOM rows: {count}",
+    "generating": "Generating 100,000 rows…",
+    "description": "Virtual scrolling list demo, supports smooth rendering of 100,000 items.",
+    "placeholder": "Virtual list component placeholder area"
+  },
+  "home": {
+    "tagline": "Advanced Agent Desktop — data flow: page (RSC) → feature → ui → lib (utils)",
+    "enterTickets": "Go to Ticket List →"
+  },
+  "feature": {
+    "overview": "Ticket Overview",
+    "viewDetails": "View Details",
+    "ticketTitle": "Ticket {id}",
+    "titleLabel": "Title:",
+    "statusLabel": "Status:",
+    "createdAtLabel": "Created At:",
+    "clickToView": "Click a ticket row in the table to view details.",
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "urgent": "Urgent"
+    }
+  },
+  "metadata": {
+    "title": "Team Portal Lite — Advanced Ticket Console",
+    "description": "B2B SaaS ticket management system for enterprise customer service departments"
+  }
+}

@@ -1,0 +1,23 @@
+﻿{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@team-portal/ui": ["../../packages/ui/src"],
+      "@team-portal/icons": ["../../packages/icons/src"],
+      "@team-portal/utils": ["../../packages/utils/src"],
+      "@team-portal/types": ["../../packages/types/src"]
+    },
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "allowJs": true,
+    "noEmit": true,
+    "incremental": true
+  },
+  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
+}

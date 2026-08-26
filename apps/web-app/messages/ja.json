@@ -1,0 +1,253 @@
+{
+  "nav": {
+    "dashboard": "ダッシュボード",
+    "tickets": "チケット",
+    "virtualList": "バーチャルリスト"
+  },
+  "common": {
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "save": "保存",
+    "loading": "読み込み中...",
+    "retry": "再試行",
+    "search": "検索",
+    "all": "すべて",
+    "yes": "はい",
+    "no": "いいえ",
+    "back": "戻る",
+    "actions": {
+      "confirm": "確認",
+      "cancel": "キャンセル",
+      "close": "閉じる",
+      "collapseSidebar": "サイドバーを折りたたむ",
+      "openMenu": "メニューを開く"
+    },
+    "fields": {
+      "status": "ステータス",
+      "priority": "優先度",
+      "assignee": "担当者",
+      "createdAt": "作成日時",
+      "updatedAt": "更新日時",
+      "customer": "顧客"
+    },
+    "language": {
+      "switchLanguage": "言語を切り替え"
+    }
+  },
+  "detail": {
+    "title": "チケット詳細",
+    "ticketId": "チケットID",
+    "notFound": "チケットの読み込みに失敗したか、存在しません",
+    "loadError": "チケットの読み込みに失敗しました。再試行してください",
+    "backToList": "リストに戻る",
+    "basicInfo": "基本情報",
+    "customerInfo": "顧客情報",
+    "description": "説明",
+    "internalNotes": "内部メモ",
+    "actions": "操作",
+    "timeline": {
+      "created": "作成",
+      "assigned": "割り当て",
+      "status_changed": "ステータス変更",
+      "priority_changed": "優先度変更",
+      "comment": "コメント",
+      "assignedTo": "{name}に割り当て",
+      "heading": "タイムライン",
+      "types": {
+        "created": "作成",
+        "assigned": "割り当て",
+        "status_changed": "ステータス変更",
+        "priority_changed": "優先度変更",
+        "comment": "コメント"
+      }
+    },
+    "customerName": "顧客名",
+    "contact": "連絡先",
+    "company": "会社",
+    "assigned": "割り当て済み",
+    "unassigned": "未割り当て",
+    "ticketClosed": "このチケットはクローズされています。操作はありません。",
+    "markAs": "{status}にする",
+    "processing": "処理中...",
+    "closing": "クローズ中...",
+    "confirmClose": "クローズ確認",
+    "confirmCloseMessage": "このチケットをクローズしてもよろしいですか？再オープンできません。",
+    "statusUpdateFailed": "ステータスの更新に失敗しました。再試行してください",
+    "illegalTransition": "不正なステータス遷移：{from} → {to}",
+    "addNotePlaceholder": "内部メモを追加...",
+    "noteSubmitFailed": "メモの送信に失敗しました。再試行してください",
+    "submitting": "送信中...",
+    "addNote": "メモを追加",
+    "noNotes": "メモはありません",
+    "priorityChangeFailed": "優先度の更新に失敗しました",
+    "assignFailed": "割り当てに失敗しました。再試行してください",
+    "updating": "更新中...",
+    "status": {
+      "pending": "未対応",
+      "in_progress": "対応中",
+      "resolved": "解決済み",
+      "closed": "クローズ済み"
+    },
+    "priority": {
+      "urgent": "緊急",
+      "high": "高",
+      "medium": "中",
+      "low": "低"
+    },
+    "invalidTransition": "この状態遷移は実行できません",
+    "updateFailed": "状態の更新に失敗しました。再試行してください",
+    "noActions": "現在の状態で実行可能な操作はありません",
+    "confirmCloseTitle": "チケットをクローズしますか？",
+    "confirmCloseBtn": "クローズ確認",
+    "cancel": "キャンセル"
+  },
+  "tickets": {
+    "list": {
+      "title": "チケットリスト",
+      "loading": "チケットリストを読み込み中...",
+      "empty": "条件に一致するチケットはありません",
+      "ariaLabel": "チケットリスト",
+      "selectTicket": "チケット {id} を選択",
+      "count": "全 {count} 件のチケット",
+      "selectAll": "すべて選択"
+    },
+    "columns": {
+      "id": "ID",
+      "title": "タイトル",
+      "customer": "顧客",
+      "priority": "優先度",
+      "status": "ステータス",
+      "assignee": "担当者",
+      "createdAt": "作成日時"
+    },
+    "batch": {
+      "selectedCount": "{count} 件選択中",
+      "deselectAll": "選択解除",
+      "assign": "一括割り当て",
+      "close": "一括クローズ",
+      "confirmClose": "選択したチケットをクローズしてもよろしいですか？",
+      "confirmCloseTitle": "チケットのクローズ確認",
+      "assignTo": "担当者を選択...",
+      "assigning": "割り当て中...",
+      "closing": "クローズ中...",
+      "failed": "操作に失敗しました。再試行してください"
+    },
+    "filter": {
+      "allStatuses": "すべてのステータス",
+      "allPriorities": "すべての優先度",
+      "allAssignees": "すべての担当者",
+      "searchPlaceholder": "チケットタイトルまたは顧客名で検索...",
+      "searchAriaLabel": "チケットを検索",
+      "placeholderStatus": "ステータスで絞り込み",
+      "placeholderPriority": "優先度で絞り込み",
+      "placeholderAssignee": "担当者で絞り込み",
+      "advanced": "詳細フィルター",
+      "ariaLabel": "チケットフィルター"
+    },
+    "overview": {
+      "title": "チケット概要",
+      "viewDetails": "詳細を見る",
+      "ticketDetail": "チケット {id}",
+      "detailTitle": "チケット詳細",
+      "clickToView": "詳細を表示するには、表のチケット行をクリックしてください。"
+    }
+  },
+  "tenant": {
+    "switchTenant": "テナント切り替え",
+    "selectTenant": "テナントを選択"
+  },
+  "notifications": {
+    "title": "通知",
+    "markAllRead": "すべて既読",
+    "empty": "通知はありません",
+    "justNow": "たった今",
+    "minutesAgo": "{count} 分前",
+    "hoursAgo": "{count} 時間前",
+    "read": "既読",
+    "markAsRead": "通知 {id} を既読にする",
+    "ariaLabel": "{count} 件の未読通知",
+    "types": {
+      "ticketAssigned": "新規チケット割り当て",
+      "ticketUpdated": "チケット更新",
+      "mention": "メンションされました"
+    }
+  },
+  "dashboard": {
+    "title": "データ概要",
+    "stats": {
+      "newToday": "本日の新規チケット",
+      "pending": "未対応チケット",
+      "resolved": "解決済みチケット",
+      "avgResponse": "平均応答時間"
+    },
+    "trend": "過去7日間のチケット傾向",
+    "distribution": "チケットステータス分布",
+    "barRank": "担当者別チケット数ランキング",
+    "ariaLabelTrend": "過去7日間の新規 vs 解決済みチケットを示す折れ線グラフ",
+    "ariaLabelPie": "チケットステータスの分布を示す円グラフ",
+    "ariaLabelBar": "担当者別チケット数上位5名を示す棒グラフ",
+    "loading": "データを読み込み中...",
+    "error": "データの読み込みに失敗しました",
+    "retry": "再試行",
+    "refresh": "更新",
+    "refreshing": "更新中...",
+    "noData": "データがありません",
+    "newTickets": "新規",
+    "resolvedTickets": "解決済み",
+    "assignee": "担当者",
+    "count": "チケット数",
+    "card": {
+      "pendingAria": "未対応チケット：{count}件、前年比{percent}増",
+      "newAria": "本日の新規チケット：{count}件、前年比{percent}減",
+      "resolvedAria": "解決済みチケット：{count}件、前年比{percent}増",
+      "avgAria": "平均応答時間：{value}"
+    },
+    "trendPlaceholder": "トレンドチャートのプレースホルダー",
+    "piePlaceholder": "円グラフのプレースホルダー",
+    "vsLastPeriod": "前の期間と比較",
+    "clickToDrillDown": "クリックして詳細を表示",
+    "topAssignees": "担当者",
+    "ticketCount": "チケット数",
+    "status": {
+      "pending": "未対応",
+      "in_progress": "対応中",
+      "resolved": "解決済み",
+      "closed": "終了"
+    }
+  },
+  "virtualList": {
+    "title": "VirtualList 10万件パフォーマンス検証",
+    "total": "合計: {count} 件",
+    "indexPlaceholder": "インデックス",
+    "jump": "ジャンプ",
+    "measureDom": "DOMノード数",
+    "currentDomRows": "現在のDOM行数: {count}",
+    "generating": "10万件のデータを生成中…",
+    "description": "仮想スクロールリストのデモ。10万件のデータをスムーズにレンダリングします。",
+    "placeholder": "仮想リストコンポーネントのプレースホルダー領域"
+  },
+  "home": {
+    "tagline": "高度なエージェントデスク — データフロー：page（RSC）→ feature → ui → lib（utils）",
+    "enterTickets": "チケットリストへ →"
+  },
+  "feature": {
+    "overview": "チケット概要",
+    "viewDetails": "詳細を見る",
+    "ticketTitle": "チケット {id}",
+    "titleLabel": "タイトル：",
+    "statusLabel": "ステータス：",
+    "createdAtLabel": "作成日時：",
+    "clickToView": "テーブルのチケット行をクリックして詳細を表示します。",
+    "priority": {
+      "low": "低",
+      "medium": "中",
+      "high": "高",
+      "urgent": "緊急"
+    }
+  },
+  "metadata": {
+    "title": "Team Portal Lite — 高度なチケットコンソール",
+    "description": "大企業のカスタマーサービス部門向けB2B SaaSチケット管理システム"
+  }
+}
