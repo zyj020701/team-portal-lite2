@@ -46,12 +46,29 @@ jobs:
         run: pnpm test
 
       - name: Build
-        run: pnpm build
+        id: build
+        continue-on-error: true
+        run: |
+          set +e
+          pnpm build 2>&1 | tee build-output.log
+          BUILD_RC=${PIPESTATUS[0]}
+          echo "build_rc=$BUILD_RC" >> "$GITHUB_OUTPUT"
+          exit 0
         env:
           # Lighthouse audits run against the production bundle; the
           # WebSocket client gracefully no-ops when this is unset.
           NEXT_PUBLIC_WS_URL: ''
           NEXT_PUBLIC_API_URL: 'http://127.0.0.1:3210'
+
+      - name: Build result
+        if: steps.build.outputs.build_rc != '0'
+        run: |
+          echo "::error::Build failed with exit ${{ steps.build.outputs.build_rc }}"
+          # Surface the error lines as annotations.
+          grep -nE "Error|error|Failed|failed|✖|Type error|Cannot" build-output.log | tail -60 | while IFS= read -r line; do
+            echo "::error::$line"
+          done
+          exit 1
 
       - name: Lighthouse CI (autorun)
         run: pnpm lhci
