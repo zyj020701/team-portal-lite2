@@ -37,18 +37,31 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Lint
+        id: lint
+        continue-on-error: true
         run: |
+          set +e
           pnpm lint 2>&1 | tee lint-output.log
-          exit ${PIPESTATUS[0]}
+          LINT_RC=${PIPESTATUS[0]}
+          echo "lint_rc=$LINT_RC" >> "$GITHUB_OUTPUT"
+          echo "::group::Lint full output"
+          cat lint-output.log
+          echo "::endgroup::"
+          # Emit the first 25 lines as errors so they show in the GitHub UI
+          head -25 lint-output.log | grep -E "error|Error|ERR|✖|warning" || true
+          exit 0
 
-      - name: Upload lint log
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: lint-output
-          path: lint-output.log
-          if-no-files-found: warn
-          retention-days: 3
+      - name: Lint result
+        run: |
+          echo "Lint exited with: ${{ steps.lint.outputs.lint_rc }}"
+          if [ "${{ steps.lint.outputs.lint_rc }}" != "0" ]; then
+            # Emit each lint error line as a GitHub annotation so it is
+            # readable via the check-runs annotations API.
+            grep -E "error|Error|✖" lint-output.log | head -40 | while IFS= read -r line; do
+              echo "::error::$line"
+            done
+            exit 1
+          fi
 
       - name: Typecheck
         run: pnpm typecheck
