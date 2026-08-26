@@ -6,7 +6,11 @@
     "moduleResolution": "Node",
     "jsx": "react-jsx",
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@team-portal/design-tokens": ["../design-tokens/src"],
+      "@team-portal/utils": ["../utils/src"],
+      "@team-portal/ws-client": ["../ws-client/src"]
+    }
   },
   "include": ["src/**/*"]
 }
