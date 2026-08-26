@@ -39,7 +39,8 @@ export default [
       '**/build/**',
       '**/coverage/**',
       '**/.lighthouse/**',
-      '**/*.config.{js,mjs,cjs}',
+      '**/*.config.{js,mjs,cjs,ts,mts,cts}',
+      '**/*.setup.ts',
     ],
   },
   {
@@ -95,6 +96,9 @@ export default [
       'import/no-restricted-paths': [
         'error',
         {
+          // Anchor zone globs to the repo root so they resolve correctly
+          // regardless of the directory turbo invokes ESLint from on CI.
+          basePath: tsconfigRootDir,
           zones: [
             {
               target: './packages/ui/**',
