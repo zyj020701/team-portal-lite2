@@ -1,7 +1,14 @@
 // @ts-check
+import { fileURLToPath } from 'node:url';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import importPlugin from 'eslint-plugin-import';
+
+// Resolve the directory of this config file so that the TypeScript project
+// service can locate tsconfig files regardless of the CWD from which ESLint
+// is invoked (turborepo runs each lint task from its own package directory on
+// Linux CI, which caused "projectService" to fail without an explicit root).
+const tsconfigRootDir = fileURLToPath(new URL('.', import.meta.url));
 
 /**
  * Shared ESLint flat config for the Team Portal Lite monorepo.
@@ -48,8 +55,10 @@ export default [
         // which is required in a pnpm + Turborepo monorepo where every app
         // and package has its own tsconfig.json.
         projectService: true,
-        // We don't check test/fixture files for type-safety as strictly.
-        // tsconfigRootDir is inferred from the config location.
+        // Anchor tsconfig resolution to this config file's directory so it
+        // works regardless of the CWD (turborepo invokes ESLint from each
+        // package directory on Linux CI).
+        tsconfigRootDir,
       },
     },
     plugins: {
