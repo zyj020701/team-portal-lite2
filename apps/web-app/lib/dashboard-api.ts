@@ -1,3 +1,4 @@
+import 'server-only';
 import type { DashboardData } from '@team-portal/types';
 
 function delay(ms: number): Promise<void> {

@@ -4,8 +4,12 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { TicketStatus, TicketPriority } from '@team-portal/types';
 
-/** Number of tickets per page in the infinite list. */
-export const PAGE_SIZE = 20;
+/**
+ * Number of tickets per page in the infinite list.
+ * Re-exported from the shared, client-safe filter module so that the SSR
+ * prefetch and client query use a single source of truth.
+ */
+export { PAGE_SIZE } from '../lib/ticket-filters';
 
 /** Sort direction. */
 export type SortDirection = 'asc' | 'desc';

@@ -9,24 +9,23 @@ import {
 } from '@tanstack/react-query';
 import type {
   TicketWithRelations,
-  TicketListParams,
   PaginatedResult,
   User,
 } from '@team-portal/types';
-import { fetchTickets, fetchUsers, batchAssignTickets, batchCloseTickets } from '../lib/ticket-api';
+import {
+  fetchTickets,
+  fetchUsers,
+  batchAssignTickets,
+  batchCloseTickets,
+} from '../lib/api-client';
 import { ticketKeys } from '../lib/query-keys';
 import { updateTicketStatusInCaches, updateTicketAssigneeInCaches } from '../lib/query-cache-utils';
-import { PAGE_SIZE } from '../stores/ticket-store';
+import {
+  buildTicketListParams,
+  type TicketQueryFilters,
+} from '../lib/ticket-filters';
 
-export interface TicketQueryFilters {
-  status?: string[];
-  priority?: string[];
-  assigneeId?: string;
-  keyword?: string;
-  date?: string;
-  sortField?: string;
-  sortDirection?: 'asc' | 'desc';
-}
+export type { TicketQueryFilters };
 
 function buildQueryKey(filters: TicketQueryFilters): readonly unknown[] {
   return ticketKeys.list(filters as Readonly<Record<string, unknown>>);
@@ -39,22 +38,7 @@ export function useTicketsInfiniteQuery(
   return useInfiniteQuery({
     queryKey: buildQueryKey(filters),
     queryFn: ({ pageParam }) => {
-      const params: TicketListParams = {
-        page: pageParam as number,
-        pageSize: PAGE_SIZE,
-        status: filters.status as TicketListParams['status'],
-        priority: filters.priority as TicketListParams['priority'],
-        assigneeId: filters.assigneeId,
-        keyword: filters.keyword,
-        date: filters.date,
-        sort:
-          filters.sortField && filters.sortDirection
-            ? {
-                field: filters.sortField as 'createdAt' | 'priority',
-                direction: filters.sortDirection,
-              }
-            : undefined,
-      };
+      const params = buildTicketListParams(pageParam as number, filters);
       return fetchTickets(params);
     },
     initialPageParam: 1,

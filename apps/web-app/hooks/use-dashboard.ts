@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import type { DashboardData } from '@team-portal/types';
-import { fetchDashboardData } from '../lib/dashboard-api';
+import { fetchDashboardData } from '../lib/api-client';
 import { dashboardKeys } from '../lib/query-keys';
 
 export { dashboardKeys } from '../lib/query-keys';

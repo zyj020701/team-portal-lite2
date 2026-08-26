@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+﻿import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderHook, waitFor, act } from '@testing-library/react';
 import { QueryClient, QueryClientProvider, type InfiniteData } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
@@ -13,14 +13,14 @@ import {
 import type { PaginatedResult, TicketWithRelations, User } from '@team-portal/types';
 import { ticketKeys } from '../lib/query-keys';
 
-vi.mock('../lib/ticket-api', () => ({
+vi.mock('../lib/api-client', () => ({
   fetchTickets: vi.fn(),
   fetchUsers: vi.fn(),
   batchAssignTickets: vi.fn(),
   batchCloseTickets: vi.fn(),
 }));
 
-import { fetchTickets, fetchUsers, batchAssignTickets, batchCloseTickets } from '../lib/ticket-api';
+import { fetchTickets, fetchUsers, batchAssignTickets, batchCloseTickets } from '../lib/api-client';
 import { PAGE_SIZE } from '../stores/ticket-store';
 
 function makeTicket(id: string): TicketWithRelations {

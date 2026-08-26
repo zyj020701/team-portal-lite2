@@ -140,3 +140,68 @@ not affect the category scores:
 | At least one complete measure → fix → re-measure iteration | ✅ five iterations logged above |
 | `pnpm build` succeeds | ✅ verified |
 
+---
+
+## 6. Iteration 6 — Mobile performance deep-dive (2026-08-27)
+
+> **Context:** A manual Lighthouse run against `next dev` reported Performance 70 on
+> `/zh/tickets`. That number is **not representative** — `next dev` ships unminified,
+> non-optimized code with React's development build and HMR overhead. The real baseline
+> is a **production** build. We nonetheless audited the **mobile preset** (the strictest
+> default: 4× CPU slowdown, ~1.6 Mbps, mobile viewport), found a genuine architectural
+> issue, and fixed it.
+
+### Root cause
+
+The client-side TanStack Query hooks imported `lib/ticket-api` → `lib/mock-data`, which
+**synchronously generates 10,000 ticket objects at module load** (`generateTickets(10000)`).
+Because this module was reachable from a client bundle, the whole dataset generator shipped
+to the browser and ran on the main thread during hydration — a large blocking task on
+throttled mobile CPUs (high TBT), plus ~12 KB of unnecessary client JS. The tickets list
+page also had **no SSR prefetch**, so the first screen waited for a client fetch.
+
+### Fix (data layer moved to the server, RSC-correct)
+
+1. Marked the data layer **`server-only`** (`mock-data.ts`, `ticket-api.ts`,
+   `dashboard-api.ts`) so it can never be bundled into client code (build fails loudly if
+   a client component imports it).
+2. Added Next.js **Route Handlers** under `app/api/*` (`tickets`, `tickets/[id]`,
+   `tickets/[id]/comments`, `tickets/batch/assign`, `tickets/batch/close`, `users`,
+   `dashboard`) that call the server-only mock layer over HTTP.
+3. Added a client-safe `lib/api-client.ts` (fetch wrapper) and pointed all client hooks
+   (`use-tickets`, `use-ticket-detail`, `use-dashboard`) at it.
+4. Added a shared, client-safe `lib/ticket-filters.ts` (`PAGE_SIZE`, URL parsing, query-key
+   & param builders) so the SSR prefetch and the client query produce **identical** keys.
+5. Added **SSR infinite-query prefetch + HydrationBoundary** to the tickets list page, so
+   the first page of tickets is rendered in the server HTML (LCP element is now
+   server-rendered).
+6. Lazy-loaded non-critical chrome (`NotificationBell` with the WebSocket client,
+   `TenantSwitcher`) via `next/dynamic` (`ssr: false`, skeleton placeholder) to shrink the
+   first-screen JS/hydration work.
+
+### Results — Production build, mobile preset (4× CPU, ~1.6 Mbps), median of 3 runs
+
+| Page | Performance | FCP | LCP | TBT | CLS |
+|------|:-----------:|-----|-----|-----|:---:|
+| Home (`/zh`) | **97** | 1.4 s | 2.5 s | 6 ms | 0 |
+| Tickets (`/zh/tickets`) | **95-96** | 1.4 s | 2.7 s | ~50 ms | 0 |
+| Ticket Detail (`/zh/tickets/TK-00001`) | **98-99** | 1.4 s | 2.3 s | ~20 ms | 0 |
+| Dashboard (`/zh/dashboard`) | **93** | 1.4 s | 2.3 s | ~245 ms | 0 |
+
+### Results — Production build, desktop preset (CI gate), median of 3 runs
+
+| Page | Performance | FCP | LCP | TBT | CLS |
+|------|:-----------:|-----|-----|-----|:---:|
+| Home | **100** | 0.37 s | 0.53 s | 0 ms | 0 |
+| Tickets | **100** | 0.37 s | 0.62 s | 0 ms | 0 |
+| Ticket Detail | **100** | 0.37 s | 0.52 s | 0 ms | 0 |
+| Dashboard | **100** | 0.37 s | 0.55 s | 35 ms | 0 |
+
+The mock dataset strings no longer appear in any client chunk (`/_next/static/chunks`);
+the tickets route's First Load JS is **139 KB** raw / well under budget gzipped.
+
+> **How to measure correctly:** never Lighthouse a `next dev` server. Use
+> `pnpm build && pnpm --filter @team-portal/web-app exec next start -p 3000`, then run
+> Lighthouse against `http://localhost:3000/zh/...`. Desktop preset is the CI gate; the
+> mobile preset numbers above are provided as a stricter reference.
+

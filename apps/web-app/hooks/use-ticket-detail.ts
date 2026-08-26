@@ -9,14 +9,14 @@ import {
   transitionTicketStatus,
   changeTicketPriority,
   assignTicketToUser,
-} from '../lib/ticket-api';
+  fetchUsers,
+} from '../lib/api-client';
 import { ticketKeys } from '../lib/query-keys';
 import {
   updateTicketStatusInCaches,
   updateTicketPriorityInCaches,
   updateTicketAssigneeInCaches,
 } from '../lib/query-cache-utils';
-import { fetchUsers } from '../lib/ticket-api';
 
 export function useTicketDetail(id: string, initialData?: TicketDetail) {
   return useQuery<TicketDetail | null>({

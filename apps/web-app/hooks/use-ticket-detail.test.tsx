@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+﻿import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderHook, waitFor, act } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
@@ -19,7 +19,7 @@ import type {
 } from '@team-portal/types';
 import { ticketKeys } from '../lib/query-keys';
 
-vi.mock('../lib/ticket-api', () => ({
+vi.mock('../lib/api-client', () => ({
   fetchTicketDetail: vi.fn(),
   fetchTicketComments: vi.fn(),
   createComment: vi.fn(),
@@ -37,7 +37,7 @@ import {
   changeTicketPriority,
   assignTicketToUser,
   fetchUsers,
-} from '../lib/ticket-api';
+} from '../lib/api-client';
 
 function makeDetail(id: string, overrides: Partial<TicketDetail> = {}): TicketDetail {
   return {

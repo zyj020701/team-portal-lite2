@@ -1,15 +1,15 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+﻿import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderHook, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 import { useDashboard } from './use-dashboard';
 import type { DashboardData } from '@team-portal/types';
 
-vi.mock('../lib/dashboard-api', () => ({
+vi.mock('../lib/api-client', () => ({
   fetchDashboardData: vi.fn(),
 }));
 
-import { fetchDashboardData } from '../lib/dashboard-api';
+import { fetchDashboardData } from '../lib/api-client';
 
 const mockDashboardData: DashboardData = {
   stats: {

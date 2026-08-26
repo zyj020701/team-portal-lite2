@@ -2,11 +2,30 @@
 
 import type { ReactNode } from 'react';
 import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import { Sidebar } from './Sidebar';
 import { MobileNav, HamburgerButton } from './MobileNav';
-import { TenantSwitcher } from '@/components/TenantSwitcher';
-import { NotificationBell } from '@/components/NotificationBell';
 import { LanguageSwitcher } from './LanguageSwitcher';
+
+// The notification bell pulls in the WebSocket client (heartbeat / reconnect /
+// message queue). It is non-critical chrome, not the LCP element, so we
+// lazy-load it after hydration to keep first-screen JS/hydration work minimal.
+const NotificationBell = dynamic(
+  () => import('@/components/NotificationBell').then((mod) => ({ default: mod.NotificationBell })),
+  {
+    ssr: false,
+    loading: () => <div className="h-10 w-10" aria-hidden="true" />,
+  },
+);
+
+// TenantSwitcher hosts the tenant/theme dropdown; defer it off the critical path too.
+const TenantSwitcher = dynamic(
+  () => import('@/components/TenantSwitcher').then((mod) => ({ default: mod.TenantSwitcher })),
+  {
+    ssr: false,
+    loading: () => <div className="h-9 w-28" aria-hidden="true" />,
+  },
+);
 
 /**
  * Top application bar — shown on all breakpoints.
