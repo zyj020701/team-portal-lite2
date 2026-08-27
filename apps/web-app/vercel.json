@@ -6,10 +6,6 @@
   "outputDirectory": ".next",
   "trailingSlash": false,
   "cleanUrls": true,
-  "env": {
-    "NEXT_PUBLIC_WS_URL": "@next-public-ws-url",
-    "NEXT_PUBLIC_API_URL": "@next-public-api-url"
-  },
   "headers": [
     {
       "source": "/(.*)",
