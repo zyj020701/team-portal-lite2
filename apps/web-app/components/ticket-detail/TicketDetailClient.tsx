@@ -10,6 +10,7 @@ import {
   type TicketPriority,
 } from '@team-portal/types';
 import { useTicketDetail, useTicketComments } from '../../hooks/use-ticket-detail';
+import { useUsers } from '../../hooks/use-tickets';
 import { StatusActions } from './StatusActions';
 import { TicketComments } from './TicketComments';
 import { TicketActionsPanel } from './TicketActionsPanel';
@@ -57,6 +58,11 @@ export function TicketDetailClient({ id, initialData }: TicketDetailClientProps)
 
   const { data: ticket, isLoading, isError } = useTicketDetail(id, initialData ?? undefined);
   const { data: comments = [] } = useTicketComments(id);
+  const { data: users } = useUsers();
+
+  const assigneeName = ticket?.assigneeId
+    ? (users?.find((u) => u.id === ticket.assigneeId)?.name ?? t('assigned'))
+    : t('unassigned');
 
   // Esc key returns to list
   useEffect(() => {
@@ -141,10 +147,7 @@ export function TicketDetailClient({ id, initialData }: TicketDetailClientProps)
             />
             <InfoRow label={tCommon('fields.createdAt')} value={formatDateTime(ticket.createdAt)} />
             <InfoRow label={tCommon('fields.updatedAt')} value={formatDateTime(ticket.updatedAt)} />
-            <InfoRow
-              label={tCommon('fields.assignee')}
-              value={ticket.assigneeId ? t('assigned') : t('unassigned')}
-            />
+            <InfoRow label={tCommon('fields.assignee')} value={assigneeName} />
           </section>
 
           {/* Customer info */}
