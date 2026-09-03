@@ -8,20 +8,26 @@ import { createMockNotificationGenerator } from '@/lib/mock-notifications';
 
 const WS_URL = process.env.NEXT_PUBLIC_WS_URL;
 
-// A real deployment sets NEXT_PUBLIC_WS_URL. When it is unset we have no
-// push server to talk to (local dev, product demos, Lighthouse CI). In that
-// case we run a simulated real-time feed (new ticket alerts etc.) so the
-// bell actually shows notifications; set NEXT_PUBLIC_WS_MOCK=0 to force it
-// off. It is never auto-enabled in production, and is forced off in CI.
+// A real deployment sets NEXT_PUBLIC_WS_URL and we connect to the genuine
+// push server. When it is unset there is no push backend (this is a
+// front-end-only demo / local dev / Lighthouse CI), so by default we run a
+// local simulated real-time feed (new-ticket alerts etc.) and the bell shows
+// live notifications + an unread badge in every environment, including the
+// Vercel production demo. The feed is fully client-side and network-free.
+//
+// Overrides:
+//   - NEXT_PUBLIC_WS_MOCK=0|false  → force the feed off (bell stays empty)
+//   - NEXT_PUBLIC_WS_MOCK=1|true   → force the mock feed on (default anyway)
+//   - CI=true                      → forced off so audits/tests stay quiet
 function resolveTransport(): { enabled: boolean; useMock: boolean } {
   const hasRealServer = Boolean(WS_URL && !WS_URL.startsWith('wss://echo.websocket'));
   if (hasRealServer) return { enabled: true, useMock: false };
 
   const flag = process.env.NEXT_PUBLIC_WS_MOCK;
-  if (flag === '0' || flag === 'false') return { enabled: false, useMock: false };
   if (process.env.CI === 'true') return { enabled: false, useMock: false };
-  if (flag === '1' || flag === 'true') return { enabled: true, useMock: true };
-  return { enabled: process.env.NODE_ENV !== 'production', useMock: true };
+  if (flag === '0' || flag === 'false') return { enabled: false, useMock: false };
+  // No real server and no explicit opt-out → run the simulated feed.
+  return { enabled: true, useMock: true };
 }
 
 const { enabled: WS_ENABLED, useMock: USE_MOCK } = resolveTransport();

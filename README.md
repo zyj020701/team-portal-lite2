@@ -221,8 +221,11 @@ graph TD
 
 | 变量名 | 暴露端 | 说明 | 示例 |
 |--------|--------|------|------|
-| `NEXT_PUBLIC_WS_URL` | 客户端 | WebSocket 服务地址；留空时实时通知客户端优雅 no-op | `wss://ws.example.com` |
+| `NEXT_PUBLIC_WS_URL` | 客户端 | WebSocket 服务地址；配置后铃铛连接真实推送服务。留空时自动启用内置的客户端模拟实时消息源（新工单提醒，含未读角标） | `wss://ws.example.com` |
+| `NEXT_PUBLIC_WS_MOCK` | 客户端 | 模拟消息源开关：留空/`1` 启用（默认，纯前端无网络请求）；`0` 强制关闭（铃铛保持空）；CI 环境自动关闭 | `1` / `0` |
 | `NEXT_PUBLIC_API_URL` | 客户端 | 后端 API 公共地址 | `https://api.example.com` |
+
+> **说明**：本仓库为纯前端 Demo，未部署真实 WebSocket 推送后端。因此生产环境（含 Vercel）在 `NEXT_PUBLIC_WS_URL` 留空时，会运行内置的 `MockNotificationClient` 模拟实时通知（进入页面约 0.3s 弹出 2 条历史通知，之后约每 12s 推送一条），铃铛的未读角标、标记已读、全部已读均可完整体验。将来接入真实推送服务时，只需配置 `NEXT_PUBLIC_WS_URL`，客户端会自动切换为真实连接。
 
 本地开发复制 `.env.example` 为 `.env.local` 并填写。代码中**禁止硬编码 API 地址**。
 
