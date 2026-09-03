@@ -3,22 +3,31 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useTheme } from '@team-portal/hooks';
+import { themeRegistry } from '@team-portal/design-tokens';
 import { Button } from '@team-portal/ui';
 
 interface Tenant {
   id: string;
   name: string;
-  /** CSS variable reference for the brand color dot */
-  colorVar: string;
 }
 
 const TENANTS: readonly Tenant[] = [
-  { id: 'company-a', name: 'Acme Corp', colorVar: 'var(--color-primary-500)' },
-  { id: 'company-b', name: 'Globex Inc', colorVar: 'var(--color-secondary-500)' },
-  { id: 'company-c', name: 'Initech', colorVar: 'var(--color-error-500)' },
-  { id: 'company-d', name: 'Umbrella LLC', colorVar: 'var(--color-info-500)' },
-  { id: 'company-e', name: 'Stark Industries', colorVar: 'var(--color-warning-500)' },
+  { id: 'company-a', name: 'Acme Corp' },
+  { id: 'company-b', name: 'Globex Inc' },
+  { id: 'company-c', name: 'Initech' },
+  { id: 'company-d', name: 'Umbrella LLC' },
+  { id: 'company-e', name: 'Stark Industries' },
 ] as const;
+
+/**
+ * Resolve a tenant's brand color from the design-token registry.
+ * The registry is the single source of truth for token values (not hardcoded),
+ * and reading it directly lets every dot preview its own tenant's brand color
+ * regardless of which theme is currently active.
+ */
+function tenantBrandColor(id: string): string {
+  return themeRegistry[id]?.tokens.colors.primary[500] ?? 'var(--color-primary-500)';
+}
 
 export function TenantSwitcher() {
   const t = useTranslations('tenant');
@@ -58,7 +67,7 @@ export function TenantSwitcher() {
       >
         <span
           className="h-3 w-3 rounded-full"
-          style={{ backgroundColor: currentTenant.colorVar }}
+          style={{ backgroundColor: tenantBrandColor(currentTenant.id) }}
           aria-hidden="true"
         />
         <span className="hidden sm:inline">{currentTenant.name}</span>
@@ -81,7 +90,7 @@ export function TenantSwitcher() {
             >
               <span
                 className="h-3 w-3 rounded-full"
-                style={{ backgroundColor: tenant.colorVar }}
+                style={{ backgroundColor: tenantBrandColor(tenant.id) }}
                 aria-hidden="true"
               />
               {tenant.name}

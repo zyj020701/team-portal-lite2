@@ -13,6 +13,7 @@
       "@team-portal/config-store": ["../../packages/config-store/src"],
       "@team-portal/i18n": ["../../packages/i18n/src"],
       "@team-portal/config-tailwind": ["../../packages/config-tailwind/src"],
+      "@team-portal/design-tokens": ["../../packages/design-tokens/src"],
       "@team-portal/ws-client": ["../../packages/ws-client/src"]
     },
     "jsx": "preserve",

@@ -179,7 +179,7 @@ export interface ThemeTokens {
   spacing: Record<string, string>;
 }
 
-export type TenantId = 'company-a' | 'company-b';
+export type TenantId = 'company-a' | 'company-b' | 'company-c' | 'company-d' | 'company-e';
 
 /**
  * A tenant (customer organization) on the platform.

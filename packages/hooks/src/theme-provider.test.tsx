@@ -30,6 +30,9 @@ describe('useTheme', () => {
     expect(result.current.theme).toEqual(defaultTheme);
     expect(result.current.availableTenants).toContain('company-a');
     expect(result.current.availableTenants).toContain('company-b');
+    expect(result.current.availableTenants).toContain('company-c');
+    expect(result.current.availableTenants).toContain('company-d');
+    expect(result.current.availableTenants).toContain('company-e');
   });
 
   it('applies theme tokens to document.documentElement on mount', () => {
@@ -52,6 +55,23 @@ describe('useTheme', () => {
     expect(result.current.tenantId).toBe('company-b');
     expect(result.current.theme).toEqual(themeRegistry['company-b']);
     expect(window.localStorage.getItem('tp-tenant')).toBe('company-b');
+  });
+
+  it('switches to every registered tenant theme (c, d and e included)', () => {
+    const tenantIds = ['company-c', 'company-d', 'company-e'] as const;
+
+    for (const id of tenantIds) {
+      const expectedTheme = themeRegistry[id];
+      const { result } = renderHook(() => useTheme(), { wrapper });
+
+      act(() => {
+        result.current.setTenant(id);
+      });
+
+      expect(result.current.tenantId).toBe(id);
+      expect(result.current.theme).toEqual(expectedTheme);
+      expect(window.localStorage.getItem('tp-tenant')).toBe(id);
+    }
   });
 
   it('applies an arbitrary theme override via setTheme', () => {

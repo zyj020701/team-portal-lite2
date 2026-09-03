@@ -16,6 +16,7 @@ const nextConfig = {
     '@team-portal/ws-client',
     '@team-portal/utils',
     '@team-portal/types',
+    '@team-portal/design-tokens',
   ],
   images: {
     formats: ['image/webp', 'image/avif'],

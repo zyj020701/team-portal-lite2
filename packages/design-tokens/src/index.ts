@@ -265,6 +265,141 @@ const companyBConfig: ThemeConfig = {
   tokens: companyBTokens,
 };
 
+// ─── Company C Theme (Emerald + Teal) ────────────────────────
+
+const companyCTokens: ThemeTokens = {
+  ...defaultTokens,
+  colors: {
+    ...defaultTokens.colors,
+    primary: {
+      50: '#ecfdf5',
+      100: '#d1fae5',
+      200: '#a7f3d0',
+      300: '#6ee7b7',
+      400: '#34d399',
+      500: '#10b981',
+      600: '#059669',
+      700: '#047857',
+      800: '#065f46',
+      900: '#064e3b',
+    },
+    secondary: {
+      50: '#f0fdfa',
+      100: '#ccfbf1',
+      200: '#99f6e4',
+      300: '#5eead4',
+      400: '#2dd4bf',
+      500: '#14b8a6',
+      600: '#0d9488',
+      700: '#0f766e',
+      800: '#115e59',
+      900: '#134e4a',
+    },
+  },
+  radius: { small: '6px', medium: '10px', large: '16px', full: '9999px' },
+  shadow: {
+    sm: '0 1px 2px rgba(6, 95, 70, 0.08)',
+    md: '0 4px 6px -1px rgba(6, 95, 70, 0.12)',
+    lg: '0 10px 15px -3px rgba(6, 95, 70, 0.12)',
+    xl: '0 20px 25px -5px rgba(6, 95, 70, 0.12)',
+  },
+};
+
+const companyCConfig: ThemeConfig = {
+  meta: { displayName: 'C 公司（翠绿）', description: '翠绿主题，适合医疗/环保/新兴行业' },
+  tokens: companyCTokens,
+};
+
+// ─── Company D Theme (Violet + Fuchsia) ──────────────────────
+
+const companyDTokens: ThemeTokens = {
+  ...defaultTokens,
+  colors: {
+    ...defaultTokens.colors,
+    primary: {
+      50: '#f5f3ff',
+      100: '#ede9fe',
+      200: '#ddd6fe',
+      300: '#c4b5fd',
+      400: '#a78bfa',
+      500: '#8b5cf6',
+      600: '#7c3aed',
+      700: '#6d28d9',
+      800: '#5b21b6',
+      900: '#4c1d95',
+    },
+    secondary: {
+      50: '#fdf4ff',
+      100: '#fae8ff',
+      200: '#f5d0fe',
+      300: '#f0abfc',
+      400: '#e879f9',
+      500: '#d946ef',
+      600: '#c026d3',
+      700: '#a21caf',
+      800: '#86198f',
+      900: '#701a75',
+    },
+  },
+  radius: { small: '8px', medium: '12px', large: '20px', full: '9999px' },
+  shadow: {
+    sm: '0 1px 2px rgba(76, 29, 149, 0.08)',
+    md: '0 4px 6px -1px rgba(76, 29, 149, 0.12)',
+    lg: '0 10px 15px -3px rgba(76, 29, 149, 0.12)',
+    xl: '0 20px 25px -5px rgba(76, 29, 149, 0.12)',
+  },
+};
+
+const companyDConfig: ThemeConfig = {
+  meta: { displayName: 'D 公司（紫罗兰）', description: '紫罗兰主题，适合创意/娱乐/时尚行业' },
+  tokens: companyDTokens,
+};
+
+// ─── Company E Theme (Orange + Steel) ────────────────────────
+
+const companyETokens: ThemeTokens = {
+  ...defaultTokens,
+  colors: {
+    ...defaultTokens.colors,
+    primary: {
+      50: '#fff7ed',
+      100: '#ffedd5',
+      200: '#fed7aa',
+      300: '#fdba74',
+      400: '#fb923c',
+      500: '#f97316',
+      600: '#ea580c',
+      700: '#c2410c',
+      800: '#9a3412',
+      900: '#7c2d12',
+    },
+    secondary: {
+      50: '#f8fafc',
+      100: '#f1f5f9',
+      200: '#e2e8f0',
+      300: '#cbd5e1',
+      400: '#94a3b8',
+      500: '#64748b',
+      600: '#475569',
+      700: '#334155',
+      800: '#1e293b',
+      900: '#0f172a',
+    },
+  },
+  radius: { small: '2px', medium: '4px', large: '6px', full: '9999px' },
+  shadow: {
+    sm: '0 1px 2px rgba(124, 45, 18, 0.08)',
+    md: '0 4px 6px -1px rgba(124, 45, 18, 0.12)',
+    lg: '0 10px 15px -3px rgba(124, 45, 18, 0.12)',
+    xl: '0 20px 25px -5px rgba(124, 45, 18, 0.12)',
+  },
+};
+
+const companyEConfig: ThemeConfig = {
+  meta: { displayName: 'E 公司（橙钢）', description: '橙色工业主题，适合制造/能源/重工业' },
+  tokens: companyETokens,
+};
+
 // ─── Theme Registry ──────────────────────────────────────────
 // Build registry from local constants first, then expose named exports.
 // This avoids a CJS circular-reference issue where `exports.defaultTheme`
@@ -274,11 +409,17 @@ const companyBConfig: ThemeConfig = {
 const themeRegistryInternal: Record<string, ThemeConfig> = {
   'company-a': companyATheme,
   'company-b': companyBConfig,
+  'company-c': companyCConfig,
+  'company-d': companyDConfig,
+  'company-e': companyEConfig,
 };
 
 export const themeRegistry: Record<string, ThemeConfig> = themeRegistryInternal;
 export const defaultTheme: ThemeConfig = companyATheme;
 export const companyBTheme: ThemeConfig = companyBConfig;
+export const companyCTheme: ThemeConfig = companyCConfig;
+export const companyDTheme: ThemeConfig = companyDConfig;
+export const companyETheme: ThemeConfig = companyEConfig;
 
 export type TenantId = keyof typeof themeRegistry;
 
