@@ -165,6 +165,7 @@
     "minutesAgo": "{count}분 전",
     "hoursAgo": "{count}시간 전",
     "read": "읽음",
+    "markRead": "읽음 표시",
     "markAsRead": "알림 {id}을(를) 읽음으로 표시",
     "ariaLabel": "읽지 않은 알림 {count}건",
     "types": {

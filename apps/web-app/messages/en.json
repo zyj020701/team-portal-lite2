@@ -165,6 +165,7 @@
     "minutesAgo": "{count} min ago",
     "hoursAgo": "{count} h ago",
     "read": "Read",
+    "markRead": "Mark read",
     "markAsRead": "Mark notification {id} as read",
     "ariaLabel": "{count} unread notifications",
     "types": {

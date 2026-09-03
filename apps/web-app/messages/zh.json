@@ -165,6 +165,7 @@
     "minutesAgo": "{count} 分钟前",
     "hoursAgo": "{count} 小时前",
     "read": "已读",
+    "markRead": "标为已读",
     "markAsRead": "标记通知 {id} 为已读",
     "ariaLabel": "{count} 条未读通知",
     "types": {

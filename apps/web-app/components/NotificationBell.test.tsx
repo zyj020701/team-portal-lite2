@@ -86,7 +86,7 @@ describe('NotificationBell', () => {
     expect(screen.getByText(/empty/)).toBeInTheDocument();
   });
 
-  it('lists notifications and marks a single one as read', () => {
+  it('lists unread notifications with a dot and marks a single one as read', () => {
     const markAsRead = vi.fn();
     setMockState({
       unreadCount: 1,
@@ -98,12 +98,37 @@ describe('NotificationBell', () => {
     fireEvent.click(screen.getByRole('button'));
     expect(screen.getByText(/message n-1/)).toBeInTheDocument();
 
+    // Unread items show an indicator dot and an action button labelled as
+    // an action ("mark as read"), never a static "read" status.
+    expect(screen.getByTestId('unread-dot')).toBeInTheDocument();
+    expect(screen.queryByTestId('read-tag')).not.toBeInTheDocument();
+
     const readButton = screen.getByRole('button', {
-      name: /notifications\.read n-1/i,
+      name: /notifications\.markAsRead/i,
     });
+    expect(readButton).toHaveTextContent(/markRead/i);
     fireEvent.click(readButton);
 
     expect(markAsRead).toHaveBeenCalledWith('n-1');
+  });
+
+  it('shows a non-interactive read tag for already-read notifications', () => {
+    setMockState({
+      unreadCount: 0,
+      notifications: [makeNotification('n-2', { read: true })],
+    });
+    render(<NotificationBell />);
+
+    fireEvent.click(screen.getByRole('button'));
+    expect(screen.getByText(/message n-2/)).toBeInTheDocument();
+
+    // Read items show the static "read" status tag, no action button and
+    // no unread dot.
+    expect(screen.queryByTestId('unread-dot')).not.toBeInTheDocument();
+    expect(screen.getByTestId('read-tag')).toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: /markAsRead/i }),
+    ).not.toBeInTheDocument();
   });
 
   it('marks all notifications as read from the dropdown header', () => {

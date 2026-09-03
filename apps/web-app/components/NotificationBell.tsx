@@ -143,7 +143,11 @@ export function NotificationBell(): JSX.Element {
         {unreadCount > 0 && (
           <span
             data-testid="unread-badge"
-            className="absolute -right-1 -top-1 inline-flex min-w-[20px] items-center justify-center rounded-radius-full bg-error px-1 text-xs font-semibold leading-5 text-white"
+            // Anchored inside the button bounds (right-0/top-0 rather than
+            // -right-1/-top-1): the bell is the right-most control in the
+            // header, so an outward-offset badge gets clipped by the viewport
+            // edge and silently disappears.
+            className="absolute right-0 top-0 inline-flex min-w-[20px] items-center justify-center rounded-radius-full bg-error px-1 text-xs font-semibold leading-5 text-white"
           >
             {displayCount}
           </span>
@@ -183,11 +187,23 @@ export function NotificationBell(): JSX.Element {
               notifications.map((n: NotificationPayload) => (
                 <li
                   key={n.id}
+                  data-read={n.read}
                   className={`border-b border-border px-4 py-3 transition hover:bg-surface-hover ${
                     n.read ? 'opacity-60' : 'bg-primary/5'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
+                    {/* Unread indicator dot — purely decorative (the read
+                        state is conveyed by the action/tag on the right).
+                        Renders as an invisible spacer on read items so both
+                        states share the same layout and avoid CLS. */}
+                    <span
+                      aria-hidden="true"
+                      data-testid={n.read ? undefined : 'unread-dot'}
+                      className={`mt-1 h-2 w-2 shrink-0 rounded-full ${
+                        n.read ? 'invisible' : 'bg-error'
+                      }`}
+                    />
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-sm font-medium text-text-primary">
                         {getNotificationTypeLabel(n.type)}
@@ -197,14 +213,24 @@ export function NotificationBell(): JSX.Element {
                         {formatRelativeTime(n.createdAt)}
                       </p>
                     </div>
-                    {!n.read && (
+                    {n.read ? (
+                      // Read items show a non-interactive "read" status tag.
+                      <span
+                        data-testid="read-tag"
+                        className="shrink-0 rounded px-2 py-1 text-[10px] font-medium text-text-tertiary"
+                      >
+                        {t('read')}
+                      </span>
+                    ) : (
                       <button
                         type="button"
                         onClick={() => markAsRead(n.id)}
-                        aria-label={`${t('read')} ${n.id}`}
+                        // Visible label and accessible name both describe the
+                        // action ("mark as read"), never the current state.
+                        aria-label={t('markAsRead', { id: n.id })}
                         className="shrink-0 rounded px-2 py-1 text-[10px] font-medium text-primary hover:bg-primary/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                       >
-                        {t('read')}
+                        {t('markRead')}
                       </button>
                     )}
                   </div>

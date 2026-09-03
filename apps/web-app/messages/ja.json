@@ -165,6 +165,7 @@
     "minutesAgo": "{count} 分前",
     "hoursAgo": "{count} 時間前",
     "read": "既読",
+    "markRead": "既読にする",
     "markAsRead": "通知 {id} を既読にする",
     "ariaLabel": "{count} 件の未読通知",
     "types": {
