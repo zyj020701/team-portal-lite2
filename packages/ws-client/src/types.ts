@@ -26,11 +26,24 @@ export interface WsMessage<T = unknown> {
 }
 
 /**
+ * Kinds of business events a notification can represent.
+ *
+ * `ticket_created` is the "new ticket" alert raised whenever a customer
+ * opens a new ticket; it is the primary signal shown by the notification
+ * bell. The other types cover assignment, follow-up edits and mentions.
+ */
+export type NotificationType =
+  | 'ticket_created'
+  | 'ticket_assigned'
+  | 'ticket_updated'
+  | 'mention';
+
+/**
  * Notification payload delivered through WebSocket.
  */
 export interface NotificationPayload {
   id: string;
-  type: 'ticket_assigned' | 'ticket_updated' | 'mention';
+  type: NotificationType;
   message: string;
   ticketId?: string;
   createdAt: string;

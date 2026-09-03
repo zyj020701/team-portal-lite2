@@ -1,11 +1,36 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { WebSocketClient, MessageQueue, TabCoordinator } from '@team-portal/ws-client';
+import {
+  WebSocketClient,
+  MockNotificationClient,
+  MessageQueue,
+  TabCoordinator,
+} from '@team-portal/ws-client';
 import type {
   ConnectionStatus,
   NotificationPayload,
   WebSocketClientConfig,
+  MockNotificationClientConfig,
 } from '@team-portal/ws-client';
+
+/**
+ * Transport used by {@link useWebSocket}.
+ *
+ * - `realtime` opens a genuine WebSocket via {@link WebSocketClient} and
+ *   participates in multi-tab leader election.
+ * - `mock` runs an in-memory simulated feed via
+ *   {@link MockNotificationClient} (for local dev / demos where no WS
+ *   server is available). It connects directly, skipping leader election,
+ *   so every tab drives its own feed and never tears itself down on a
+ *   lost-election event.
+ */
+export type WebSocketTransport = 'realtime' | 'mock';
+
+/** Minimal surface shared by the real and mock clients. */
+interface NotificationTransport {
+  connect(): void;
+  disconnect(): void;
+}
 
 /**
  * Return value of the {@link useWebSocket} hook.
@@ -58,19 +83,33 @@ function createCoordinator(
  * @param channelName - BroadcastChannel name for tab coordination.
  * @param enabled - When false, the hook creates no connection (default true).
  */
+export interface UseWebSocketOptions {
+  /** Selects the real WebSocket transport or a simulated mock feed. */
+  transport?: WebSocketTransport;
+  /** Configuration passed to {@link MockNotificationClient} when `transport === 'mock'`. */
+  mockConfig?: MockNotificationClientConfig;
+}
+
 export function useWebSocket(
   config: WebSocketClientConfig,
   channelName = 'team-portal-ws',
   enabled = true,
+  options: UseWebSocketOptions = {},
 ): UseWebSocketResult {
+  const { transport = 'realtime', mockConfig } = options;
+  const isMock = transport === 'mock';
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('disconnected');
   const [notifications, setNotifications] = useState<NotificationPayload[]>([]);
   const [lastMessage, setLastMessage] = useState<NotificationPayload | null>(null);
 
-  const clientRef = useRef<WebSocketClient | null>(null);
+  const clientRef = useRef<NotificationTransport | null>(null);
   const queueRef = useRef<MessageQueue | null>(null);
   const coordinatorRef = useRef<TabCoordinator | null>(null);
   const notificationsRef = useRef<NotificationPayload[]>([]);
+  // Keep the latest mock config available without re-creating the client
+  // when a caller passes a fresh object literal on every render.
+  const mockConfigRef = useRef<MockNotificationClientConfig | undefined>(mockConfig);
+  mockConfigRef.current = mockConfig;
 
   // Keep ref in sync for use in callbacks without re-subscribing
   useEffect(() => {
@@ -101,28 +140,39 @@ export function useWebSocket(
     };
   }, [addNotifications]);
 
-  // Initialize WebSocket client
+  // Initialize the notification transport (real WebSocket or mock feed)
   useEffect(() => {
     if (!enabled) return;
-    const client = new WebSocketClient(config, {
+    const callbacks: ConstructorParameters<typeof WebSocketClient>[1] = {
       onStatusChange: (status) => setConnectionStatus(status),
       onNotification: (notification) => {
-        // Leader: enqueue locally and broadcast to other tabs
+        // Enqueue locally (batches into React state via the MessageQueue).
         queueRef.current?.enqueue(notification);
+        // Broadcast to other tabs — only meaningful for the realtime
+        // leader; the coordinator is never created in mock mode.
         coordinatorRef.current?.broadcastNotification(notification);
       },
-    });
+    };
+
+    const client: NotificationTransport = isMock
+      ? new MockNotificationClient(mockConfigRef.current ?? {}, callbacks)
+      : new WebSocketClient(config, callbacks);
     clientRef.current = client;
 
     return () => {
       client.disconnect();
       clientRef.current = null;
     };
-  }, [config.url, enabled]);
+  }, [config.url, enabled, isMock]);
 
   // Initialize tab coordinator
   useEffect(() => {
     if (!enabled) return;
+    // Mock feed connects directly — no leader election, no cross-tab sync.
+    if (isMock) {
+      clientRef.current?.connect();
+      return;
+    }
     const coordinator = createCoordinator(channelName, {
       onBecomeLeader: () => {
         clientRef.current?.connect();
@@ -161,7 +211,7 @@ export function useWebSocket(
       coordinator?.destroy();
       coordinatorRef.current = null;
     };
-  }, [channelName, enabled]);
+  }, [channelName, enabled, isMock]);
 
   const unreadCount = notifications.reduce((count, n) => (n.read ? count : count + 1), 0);
 

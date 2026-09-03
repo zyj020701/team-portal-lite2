@@ -168,9 +168,16 @@
     "markAsRead": "標記通知 {id} 為已讀",
     "ariaLabel": "{count} 條未讀通知",
     "types": {
+      "ticketCreated": "新工單",
       "ticketAssigned": "新工單分配",
       "ticketUpdated": "工單更新",
       "mention": "有人@你"
+    },
+    "mock": {
+      "ticketCreated": "{company} 提交了新工單 {ticket}",
+      "ticketAssigned": "工單 {ticket} 已分配給 {agent}",
+      "ticketUpdated": "{agent} 更新了工單 {ticket}",
+      "mention": "{agent} 在工單 {ticket} 中提到了你"
     }
   },
   "dashboard": {

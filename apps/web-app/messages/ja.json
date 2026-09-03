@@ -168,9 +168,16 @@
     "markAsRead": "通知 {id} を既読にする",
     "ariaLabel": "{count} 件の未読通知",
     "types": {
+      "ticketCreated": "新規チケット",
       "ticketAssigned": "新規チケット割り当て",
       "ticketUpdated": "チケット更新",
       "mention": "メンションされました"
+    },
+    "mock": {
+      "ticketCreated": "{company} が新規チケット {ticket} を登録しました",
+      "ticketAssigned": "チケット {ticket} が {agent} に割り当てられました",
+      "ticketUpdated": "{agent} がチケット {ticket} を更新しました",
+      "mention": "{agent} がチケット {ticket} であなたにメンションしました"
     }
   },
   "dashboard": {

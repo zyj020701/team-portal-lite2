@@ -168,9 +168,16 @@
     "markAsRead": "알림 {id}을(를) 읽음으로 표시",
     "ariaLabel": "읽지 않은 알림 {count}건",
     "types": {
+      "ticketCreated": "새 티켓",
       "ticketAssigned": "새 티켓 할당",
       "ticketUpdated": "티켓 업데이트",
       "mention": "멘션되었습니다"
+    },
+    "mock": {
+      "ticketCreated": "{company}에서 새 티켓 {ticket}을(를) 등록했습니다",
+      "ticketAssigned": "티켓 {ticket}이(가) {agent}에게 할당되었습니다",
+      "ticketUpdated": "{agent}이(가) 티켓 {ticket}을(를) 업데이트했습니다",
+      "mention": "{agent}이(가) 티켓 {ticket}에서 회원님을 멘션했습니다"
     }
   },
   "dashboard": {

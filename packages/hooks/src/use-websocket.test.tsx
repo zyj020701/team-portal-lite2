@@ -46,6 +46,7 @@ vi.mock('@team-portal/ws-client', () => {
   }
   return {
     WebSocketClient: MockWebSocketClient,
+    MockNotificationClient: MockWebSocketClient,
     MessageQueue: MockMessageQueue,
     TabCoordinator: class {
       constructor(
@@ -117,6 +118,53 @@ describe('useWebSocket', () => {
   it('does not create a connection when enabled is false', () => {
     renderHook(() => useWebSocket({ url: 'wss://example.com' }, 'ch', false));
     expect(clientMocks.instances).toHaveLength(0);
+  });
+
+  it('uses the mock transport when transport is "mock" and connects directly', () => {
+    const generator = vi.fn(() => ({
+      type: 'ticket_created' as const,
+      message: 'mock new ticket',
+      ticketId: 'TK-1',
+    }));
+
+    renderHook(() =>
+      useWebSocket(
+        { url: '' },
+        'ch',
+        true,
+        { transport: 'mock', mockConfig: { interval: 99, initialBurst: 0, generateNotification: generator } },
+      ),
+    );
+
+    // A client was created and connected immediately (no leader election).
+    const client = clientMocks.instances[0];
+    expect(client).toBeDefined();
+    expect(client?.connect).toHaveBeenCalledTimes(1);
+
+    // No TabCoordinator handler capture means no coordinator was set up;
+    // the client receives notifications straight from the mock feed.
+    act(() => {
+      client?.callbacks.onNotification?.(
+        makeNotification('m1', { type: 'ticket_created', message: 'new ticket' }),
+      );
+    });
+  });
+
+  it('mock transport ignores lost-leadership (no cross-tab teardown)', () => {
+    renderHook(() =>
+      useWebSocket({ url: '' }, 'ch', true, { transport: 'mock' }),
+    );
+    const client = clientMocks.instances[0];
+    expect(client?.connect).toHaveBeenCalledTimes(1);
+
+    // In mock mode there is no coordinator, so a leadership event must not
+    // be wired up; invoking it defensively must not disconnect the client.
+    expect(() => {
+      act(() => {
+        clientMocks.getCoordinatorHandlers().onLoseLeadership?.();
+      });
+    }).not.toThrow();
+    expect(client?.disconnect).not.toHaveBeenCalled();
   });
 
   it('reflects connection status changes reported by the client', () => {

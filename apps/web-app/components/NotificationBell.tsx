@@ -1,16 +1,30 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslations, useFormatter } from 'next-intl';
 import { useWebSocket } from '@team-portal/hooks';
 import type { NotificationPayload } from '@team-portal/ws-client';
+import { createMockNotificationGenerator } from '@/lib/mock-notifications';
 
 const WS_URL = process.env.NEXT_PUBLIC_WS_URL;
 
-// When no real WS endpoint is configured (e.g. local dev / Lighthouse CI),
-// we skip connecting entirely to avoid browser console errors from
-// unreachable echo servers. A real deployment sets NEXT_PUBLIC_WS_URL.
-const WS_ENABLED = Boolean(WS_URL && !WS_URL.startsWith('wss://echo.websocket'));
+// A real deployment sets NEXT_PUBLIC_WS_URL. When it is unset we have no
+// push server to talk to (local dev, product demos, Lighthouse CI). In that
+// case we run a simulated real-time feed (new ticket alerts etc.) so the
+// bell actually shows notifications; set NEXT_PUBLIC_WS_MOCK=0 to force it
+// off. It is never auto-enabled in production, and is forced off in CI.
+function resolveTransport(): { enabled: boolean; useMock: boolean } {
+  const hasRealServer = Boolean(WS_URL && !WS_URL.startsWith('wss://echo.websocket'));
+  if (hasRealServer) return { enabled: true, useMock: false };
+
+  const flag = process.env.NEXT_PUBLIC_WS_MOCK;
+  if (flag === '0' || flag === 'false') return { enabled: false, useMock: false };
+  if (process.env.CI === 'true') return { enabled: false, useMock: false };
+  if (flag === '1' || flag === 'true') return { enabled: true, useMock: true };
+  return { enabled: process.env.NODE_ENV !== 'production', useMock: true };
+}
+
+const { enabled: WS_ENABLED, useMock: USE_MOCK } = resolveTransport();
 
 /**
  * Notification bell with unread badge and dropdown list.
@@ -19,10 +33,24 @@ const WS_ENABLED = Boolean(WS_URL && !WS_URL.startsWith('wss://echo.websocket'))
 export function NotificationBell(): JSX.Element {
   const t = useTranslations('notifications');
   const format = useFormatter();
+
+  // Localized generator for the simulated feed; stable across renders.
+  const mockConfig = useMemo(
+    () => ({
+      interval: 12_000,
+      initialBurst: 2,
+      generateNotification: createMockNotificationGenerator(
+        (key, params) => t(key, params) as string,
+      ),
+    }),
+    [t],
+  );
+
   const { connectionStatus, unreadCount, notifications, markAsRead, markAllAsRead } = useWebSocket(
     { url: WS_URL ?? '' },
     'team-portal-ws',
     WS_ENABLED,
+    USE_MOCK ? { transport: 'mock', mockConfig } : { transport: 'realtime' },
   );
 
   const [open, setOpen] = useState(false);
@@ -67,6 +95,8 @@ export function NotificationBell(): JSX.Element {
 
   function getNotificationTypeLabel(type: NotificationPayload['type']): string {
     switch (type) {
+      case 'ticket_created':
+        return t('types.ticketCreated');
       case 'ticket_assigned':
         return t('types.ticketAssigned');
       case 'ticket_updated':

@@ -168,9 +168,16 @@
     "markAsRead": "Mark notification {id} as read",
     "ariaLabel": "{count} unread notifications",
     "types": {
+      "ticketCreated": "New ticket",
       "ticketAssigned": "New ticket assigned",
       "ticketUpdated": "Ticket updated",
       "mention": "You were mentioned"
+    },
+    "mock": {
+      "ticketCreated": "New ticket {ticket} opened by {company}",
+      "ticketAssigned": "Ticket {ticket} assigned to {agent}",
+      "ticketUpdated": "Ticket {ticket} was updated by {agent}",
+      "mention": "{agent} mentioned you on ticket {ticket}"
     }
   },
   "dashboard": {
