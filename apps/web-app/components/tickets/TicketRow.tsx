@@ -6,17 +6,26 @@ import { useRouter } from '../../i18n/navigation';
 import type { TicketWithRelations, TicketStatus, TicketPriority } from '@team-portal/types';
 import { cn } from '@team-portal/utils';
 
+// Status/priority chips pair a solid light tint (-100 background) with a
+// dark shade (-800 text). Using a solid background (instead of a translucent
+// `bg-{color}/15`) avoids double-tint colour shifts when a row is selected or
+// hovered, and the -800 text clears the WCAG AA 4.5:1 contrast floor on every
+// chip. Measured computed-style contrast on the tickets list page: info
+// #1e40af on #dbeafe = 7.15:1, warning #92400e on #fef3c7 = 6.37:1, error
+// #991b1b on #fee2e2 = 6.80:1, success #166534 on #dcfce7 = 6.49:1, neutral
+// #4b5563 on #e5e7eb = 6.10:1. The earlier -700 text on a 15%-opacity tint
+// failed Lighthouse's color-contrast audit on the list page.
 const STATUS_STYLES: Record<TicketStatus, string> = {
-  pending: 'bg-warning/15 text-warning-700',
-  in_progress: 'bg-info/15 text-info-700',
-  resolved: 'bg-success/15 text-success-700',
+  pending: 'bg-warning-100 text-warning-800',
+  in_progress: 'bg-info-100 text-info-800',
+  resolved: 'bg-success-100 text-success-800',
   closed: 'bg-neutral-200 text-neutral-600',
 };
 
 const PRIORITY_STYLES: Record<TicketPriority, string> = {
-  urgent: 'bg-error/15 text-error-700',
-  high: 'bg-warning/15 text-warning-700',
-  medium: 'bg-info/15 text-info-700',
+  urgent: 'bg-error-100 text-error-800',
+  high: 'bg-warning-100 text-warning-800',
+  medium: 'bg-info-100 text-info-800',
   low: 'bg-neutral-200 text-neutral-600',
 };
 
